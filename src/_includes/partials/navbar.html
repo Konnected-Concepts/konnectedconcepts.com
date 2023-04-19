@@ -1,33 +1,204 @@
-<div class="{{ 'lg:fixed' if path == 'home' }} w-full">
-    <nav class="flex items-center justify-center lg:justify-between flex-wrap p-6 lg:px-0 container mx-auto" x-data="{ isOpen: false }" @keydown.escape="isOpen = false"  @click.away="isOpen = false">
-        <!--Logo etc-->
-        <div class="flex items-center">
-            <a href="/" class="text-indigo-500 font-bold text-lg">
-                Logo</a>
-        </div>
+<header class="bg-white z-50">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+      <div class="flex items-center gap-x-12">
+        <a href="/index.html" class="-m-1.5 p-1.5">
+          <span class="sr-only">Konnected Concepts</span>
+          <img class="h-8 w-auto" src="../../static/img/kc-logo.png" alt="">
+        </a>
+        <div class="hidden lg:flex lg:gap-x-12">
 
-        <!--Toggle button (hidden on large screens)-->
-        <button @click="isOpen = !isOpen" type="button" class="ml-auto block lg:hidden px-2 text-primary-500 hover:text-primary-500 focus:outline-none focus:text-primary-500" :class="{ 'transition transform-180': isOpen }" aria-label="Menu">
-            <svg class="h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
-                <path x-show="isOpen" fill-rule="evenodd" clip-rule="evenodd" d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"/>
-                <path x-show="!isOpen" fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"/>
-            </svg>
+          <div>
+            <a href="/products" class="text-sm font-semibold leading-6 text-gray-600">Products</a>
+          </div>
+
+          <!-- Dropdown Button -->
+          <div
+            x-data="{ 
+              open: false,
+              toggle() { 
+                this.open = this.open ? this.close() : true 
+              },
+              close(focusAfter) { 
+                this.open = false 
+
+                focusAfter && focusAfter.focus()
+              }
+            }"
+            @keydown.escape.prevent.stop="close()"
+            @focusin.window="$refs.panel.contains($event.target) && close()"
+            x-id="['dropdown-button']"
+            class="relative"
+          >
+            <button
+              x-ref="button"
+              @click="toggle()"
+              :aria-expanded="open"
+              :aria-controls="$id=('dropdown-button')"
+              type="button"
+              class="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-600"
+            >
+              <span>Services</span>
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          
+            <!--
+              Flyout menu, show/hide based on flyout menu state.
+          
+              Entering: "transition ease-out duration-200"
+                From: "opacity-0 translate-y-1"
+                To: "opacity-100 translate-y-0"
+              Leaving: "transition ease-in duration-150"
+                From: "opacity-100 translate-y-0"
+                To: "opacity-0 translate-y-1"
+            -->
+            <div
+            x-ref="panel"
+            x-show="open"
+            @click.outside="close($refs.button)"
+            style="display: none;"
+            class="absolute left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4">
+              <div class="w-64 max-w-md flex-auto overflow-hidden rounded-3xl bg-white text-md leading-6 shadow-lg ring-1 ring-gray-900/5">
+                <div class="p-4">
+                  <a href="/services/professional-services" class="block rounded-lg px-3 py-2 text-md font-semibold leading-6 text-gray-900 hover:bg-gray-50">Professional Services</a>
+
+                  <a href="/services/end-point-security" class="block rounded-lg px-3 py-2 text-md font-semibold leading-6 text-gray-900 hover:bg-gray-50">End-Point Security</a>
+
+                  <a href="/services/cloud-application-and-management" class="block rounded-lg px-3 py-2 text-md font-semibold leading-6 text-gray-900 hover:bg-gray-50">Cloud Application & Management</a>
+
+                  <a href="/services/disaster-recovery" class="block rounded-lg px-3 py-2 text-md font-semibold leading-6 text-gray-900 hover:bg-gray-50">Disaster Recovery</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dropdown Button -->
+          <div
+            x-data="{ 
+              open: false,
+              toggle() { 
+                this.open = this.open ? this.close() : true 
+              },
+              close(focusAfter) { 
+                this.open = false 
+
+                focusAfter && focusAfter.focus()
+              }
+            }"
+            @keydown.escape.prevent.stop="close()"
+            @focusin.window="$refs.panel.contains($event.target) && close()"
+            x-id="['dropdown-button']"
+            class="relative"
+          >
+            <button
+              x-ref="button"
+              @click="toggle()"
+              :aria-expanded="open"
+              :aria-controls="$id=('dropdown-button')"
+              type="button"
+              class="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-600"
+            >
+              <span>Solutions</span>
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          
+            <!--
+              Flyout menu, show/hide based on flyout menu state.
+          
+              Entering: "transition ease-out duration-200"
+                From: "opacity-0 translate-y-1"
+                To: "opacity-100 translate-y-0"
+              Leaving: "transition ease-in duration-150"
+                From: "opacity-100 translate-y-0"
+                To: "opacity-0 translate-y-1"
+            -->
+            <div
+            x-ref="panel"
+            x-show="open"
+            @click.outside="close($refs.button)"
+            style="display: none;"
+            class="absolute left-1/2 z-10 mt-5 flex w-screen max-w-max -translate-x-1/2 px-4">
+              <div class="w-64 max-w-md flex-auto overflow-hidden rounded-3xl bg-white text-md leading-6 shadow-lg ring-1 ring-gray-900/5">
+                <div class="p-4">
+                  <a href="/solutions/iot-m2m" class="block rounded-lg px-3 py-2 text-md font-semibold leading-6 text-gray-900 hover:bg-gray-50">IoT/M2M (Machine to Machine)</a>
+
+                  <a href="/solutions/complete-tablet-solutions" class="block rounded-lg px-3 py-2 text-md font-semibold leading-6 text-gray-900 hover:bg-gray-50">Complete Tablet Solutions</a>
+
+                  <a href="/solutions/network" class="block rounded-lg px-3 py-2 text-md font-semibold leading-6 text-gray-900 hover:bg-gray-50">Network</a>
+
+                  <a href="/solutions/5g-business-internet" class="block rounded-lg px-3 py-2 text-md font-semibold leading-6 text-gray-900 hover:bg-gray-50">5G Business Internet</a>
+
+                  <a href="/solutions/mdm" class="block rounded-lg px-3 py-2 text-md font-semibold leading-6 text-gray-900 hover:bg-gray-50">MDM</a>
+
+                  <a href="/solutions/private-networks" class="block rounded-lg px-3 py-2 text-md font-semibold leading-6 text-gray-900 hover:bg-gray-50">Private Networks</a>
+
+                  <a href="/solutions/business-continuity" class="block rounded-lg px-3 py-2 text-md font-semibold leading-6 text-gray-900 hover:bg-gray-50">Business Continuity</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <a href="#" class="text-sm font-semibold leading-6 text-gray-600">KC University</a>
+
+          <a href="/about" class="text-sm font-semibold leading-6 text-gray-600">About Us</a>
+
+          <a href="/contact" class="text-sm font-semibold leading-6 text-gray-600">Contact</a>
+        </div>
+      </div>
+      <div class="flex lg:hidden">
+        <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+          <span class="sr-only">Open main menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
         </button>
-
-        <!--Menu-->
-        <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto text-center " :class="{ 'block shadow-3xl': isOpen, 'hidden': !isOpen }" x-show.transition="true">
-
-            {% if navigation.items %}
-
-                <ul class="pt-6 lg:pt-0 list-reset lg:flex justify-end flex-1 items-center">
-                    {% for item in navigation.items %}
-                        <li class="nav__item mr-3">
-                            <a @click="isOpen = false" class="text-ml inline-block text-gray-500 no-underline hover:text-indigo-500 py-2 px-4" href="{{ item.url }}">{{ item.text }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-
-            {% endif %}
-        </div>
+      </div>
+      <div class="hidden lg:flex">
+        <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span aria-hidden="true">&rarr;</span></a>
+      </div>
     </nav>
-</div>
+    <!-- Mobile menu, show/hide based on menu open state. -->
+    <div class="lg:hidden" role="dialog" aria-modal="true">
+      <!-- Background backdrop, show/hide based on slide-over state. -->
+      <div class="fixed inset-0 z-10"></div>
+      <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <div class="flex items-center justify-between">
+          <a href="/index" class="-m-1.5 p-1.5">
+            <span class="sr-only">Konnected Concepts</span>
+            <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="">
+          </a>
+          <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+            <span class="sr-only">Close menu</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="mt-6 flow-root">
+          <div class="-my-6 divide-y divide-gray-500/10">
+            <div class="space-y-2 py-6">
+              <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Products</a>
+  
+              <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Services</a>
+  
+              <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Solutions</a>
+  
+              <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">KC University</a>
+
+              <a href="/about" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">About Us</a>
+
+              <a href="/contact" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Contact</a>
+            </div>
+            <div class="py-6">
+              <!-- <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  
