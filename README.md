@@ -1,1 +1,1 @@
-# KonnectedConcepots.com
+# KonnectedConcepts.com
