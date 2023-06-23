@@ -5,7 +5,7 @@ path: solutions/iot-m2m
 ---
 
   <div class="bg-gray-900 px-6 py-16 sm:py-24 lg:px-8">
-    <div class="mx-auto max-w-2xl text-center">
+    <div class="mx-auto max-w-2xl">
         <p class="text-base font-semibold leading-7 text-indigo-300">Solutions</p>
       <h2 class="mt-2 text-4xl font-bold tracking-tight text-white sm:text-6xl">IoT/M2M (Machine to Machine)</h2>
       <p class="mt-6 text-lg leading-8 text-gray-300">We bundle this with our proprietary software, a portal that gives you the insight and ability to monitor your data consumption, activate and suspend devices, and set rules and download reports just to name a few. Are you struggling with the complexity of IoT connectivity and management? Our experts can help you overcome the challenges of scale, security, and reliability when building out your IoT environment.
@@ -43,6 +43,76 @@ path: solutions/iot-m2m
       </div>
     </div>
   </div>
+
+
+
+  <div x-data="{ active: 1 }" class="mx-auto max-w-3xl w-full min-h-[16rem] space-y-4">
+    <div x-data="{
+        id: 1,
+        get expanded() {
+            return this.active === this.id
+        },
+        set expanded(value) {
+            this.active = value ? this.id : null
+        },
+    }" role="region" class="rounded-lg bg-white shadow">
+        <h2>
+            <button
+                x-on:click="expanded = !expanded"
+                :aria-expanded="expanded"
+                class="flex w-full items-center justify-between px-6 py-4 text-xl font-bold"
+            >
+                <span>What is Massive IoT?</span>
+                <span x-show="expanded" aria-hidden="true" class="ml-4">&minus;</span>
+                <span x-show="!expanded" aria-hidden="true" class="ml-4">&plus;</span>
+            </button>
+        </h2>
+
+        <div x-show="expanded" x-collapse>
+            <div class="px-6 pb-4">
+              Massive IoT connectivity provides wide coverage and reduced power consumption along with high availability for the entire lifecycle of your devices. Thanks to our scalable solutions, you can keep costs low and innovation moving forward.​​
+              <br>
+              <br>
+              Massive IoT solutions are tailored to the needs of very large environments, such as those in manufacturing and agricultural sectors. Such environments have hundreds or even thousands of devices, but Massive IoT is designed to keep power consumption as low as possible without compromising on performance and availability.​
+              <br>
+              <br>
+              ​Our networks already provide full support for LTE technologies, including NB-IoT and LTE-M. NB-IoT is primarily intended for use in indoor areas, such as smart homes and offices, while LTE-M is better suited to devices in hard-to-reach locations and those that require full mobility and voice-control functionality. Thanks to low data flow and extended battery life, you can use existing networks and continue to expand your infrastructure as 5G connectivity rolls out.
+            </div>
+        </div>
+    </div>
+
+    <div x-data="{
+        id: 2,
+        get expanded() {
+            return this.active === this.id
+        },
+        set expanded(value) {
+            this.active = value ? this.id : null
+        },
+    }" role="region" class="rounded-lg bg-white shadow">
+        <h2>
+            <button
+                x-on:click="expanded = !expanded"
+                :aria-expanded="expanded"
+                class="flex w-full items-center justify-between px-6 py-4 text-xl font-bold"
+            >
+                <span>What is Critical IoT?</span>
+                <span x-show="expanded" aria-hidden="true" class="ml-4">&minus;</span>
+                <span x-show="!expanded" aria-hidden="true" class="ml-4">&plus;</span>
+            </button>
+        </h2>
+
+        <div x-show="expanded" x-collapse>
+            <div class="px-6 pb-4">Designed to support mission-critical use cases that demand extremely high uptime, critical IoT applications have very low latency and provide excellent coverage to deliver vital information as quickly as possible.​​
+              <br>
+              <br>
+              Critical business use cases, such as latency-sensitive predictive maintenance solutions, need lightning-fast connections with a high data throughput. The continuing roll out of 5G networks will rapidly accelerate the adoption of critical IoT and greatly improve the capabilities of existing networks. This is increasingly vital in the age of remote work, where employees need reliable connectivity no matter where they are and which devices they are using.​​
+              <br>
+              <br>
+              Our solutions empower your remote workers and field workers and help you maintain complete oversight of your business-critical operations. With virtual private networking, we can also help you keep ahead of threats to your network security.</div>
+        </div>
+    </div>
+</div>
 
   <div class="bg-white">
     <div class="mx-auto max-w-7xl py-16 sm:px-6 sm:py-24 lg:px-8">
